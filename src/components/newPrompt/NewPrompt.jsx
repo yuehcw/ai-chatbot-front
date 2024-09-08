@@ -123,11 +123,13 @@ const NewPrompt = ({ data }) => {
   const hasRun = useRef(false);
 
   useEffect(() => {
-    if (!hasRun.current && data?.history?.length) {
-      add(data.history[0].parts[0]?.text, true);
-      hasRun.current = true;
+    if (!hasRun.current) {
+      if (data?.history?.length === 1) {
+        add(data.history[0].parts[0].text, true);
+      }
     }
-  }, [data]);
+    hasRun.current = true;
+  }, []);
 
   return (
     <>
