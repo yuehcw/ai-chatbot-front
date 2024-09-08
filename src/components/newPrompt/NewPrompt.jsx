@@ -17,12 +17,17 @@ const NewPrompt = ({ data }) => {
   });
 
   const chat = model.startChat({
-    history: [
-      data?.history.map(({ role, parts }) => ({
-        role,
-        parts: [{ text: parts[0].text }],
-      })),
-    ],
+    history: data?.history
+      ? data.history.map(({ role, parts }) => ({
+          role,
+          parts: [{ text: parts[0]?.text }],
+        }))
+      : [
+          {
+            role: "user",
+            parts: [{ text: "Hello, I have 2 dogs in my house." }],
+          },
+        ],
     generationConfig: {
       // maxOutputTokens: 100,
     },
@@ -72,6 +77,10 @@ const NewPrompt = ({ data }) => {
   });
 
   const add = async (text, isInitial) => {
+    if (!text || !text.trim()) {
+      setAnswer("Please enter a valid question.");
+      return;
+    }
     if (!isInitial) setQuestion(text);
 
     try {
@@ -109,13 +118,11 @@ const NewPrompt = ({ data }) => {
   const hasRun = useRef(false);
 
   useEffect(() => {
-    if (!hasRun.current) {
-      if (data?.history?.length === 1) {
-        add(data.history[0].parts[0].text, true);
-      }
+    if (!hasRun.current && data?.history?.length) {
+      add(data.history[0].parts[0]?.text, true);
+      hasRun.current = true;
     }
-    hasRun.current = true;
-  }, []);
+  }, [data]);
 
   return (
     <>
