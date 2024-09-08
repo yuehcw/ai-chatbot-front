@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import DashboardLayout from "./layouts/dashboardLayout/dashboardLayout";
+import DashboardLayout from "./layouts/dashboardLayout/DashboardLayout";
 import RootLayout from "./layouts/rootLayout/RootLayout";
 import ChatPage from "./pages/chatPage/ChatPage";
 import DashboardPage from "./pages/dashboardPage/DashboardPage";
