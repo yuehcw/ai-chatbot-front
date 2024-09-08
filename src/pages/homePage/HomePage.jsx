@@ -13,8 +13,8 @@ const HomePage = () => {
         <h1>AI CHATBOT</h1>
         <h2>Supercharge your creativity and productivity</h2>
         <h3>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga,
-          cupiditate similique dolore aspernatur.
+          Unlock your creativity with AI. Collaborate with our chatbot to boost
+          productivity and bring your ideas to life effortlessly.
         </h3>
         <Link to="/dashboard">Get Started</Link>
       </div>
@@ -38,22 +38,22 @@ const HomePage = () => {
             <TypeAnimation
               sequence={[
                 // Same substring at the start will only be typed out once, initially
-                "Human: We produce food for Mice",
+                "User: This chatbot transformed our workflows!",
                 2000,
                 () => {
                   setTypingStatus("bot");
                 },
-                "Bot: We produce food for Hamsters",
+                "Bot: Seamless, intelligent conversations.",
                 2000,
                 () => {
                   setTypingStatus("human2");
                 },
-                "Human2: We produce food for Guinea Pigs",
+                "User: Increased productivity from day one.",
                 2000,
                 () => {
                   setTypingStatus("bot");
                 },
-                "Bot: We produce food for Chinchillas",
+                "Bot: The best AI tool we've used yet.",
                 2000,
                 () => {
                   setTypingStatus("human1");
