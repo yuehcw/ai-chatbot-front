@@ -8,15 +8,23 @@ const DashboardPage = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { getToken } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      const token = await getToken();
+      if (token) {
+        setIsLoading(false);
+      } else {
+        console.error("Token not available");
+      }
+    };
+    fetchToken();
+  }, [getToken]);
 
   const mutation = useMutation({
     mutationFn: async (text) => {
       const token = await getToken();
-
-      // Ensure the token is available
-      if (!token) {
-        throw new Error("Authentication failed: No token available");
-      }
 
       return fetch(`${import.meta.env.VITE_API_URL}/api/chats`, {
         method: "POST",
