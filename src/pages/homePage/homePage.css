@@ -83,7 +83,7 @@
         .bg {
           background-image: url("/bg.png");
           opacity: 0.2;
-          width: 100%;
+          width: 200%;
           height: 100%;
           background-size: auto 100%;
           animation: 8s ease-in-out infinite alternate slidebg;
