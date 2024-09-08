@@ -1,6 +1,6 @@
 import { useAuth } from "@clerk/clerk-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./dashboardPage.css";
 
@@ -8,19 +8,6 @@ const DashboardPage = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { getToken } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      const token = await getToken();
-      if (token) {
-        setIsLoading(false);
-      } else {
-        console.error("Token not available");
-      }
-    };
-    fetchToken();
-  }, [getToken]);
 
   const mutation = useMutation({
     mutationFn: async (text) => {
