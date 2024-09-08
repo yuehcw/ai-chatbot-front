@@ -5,7 +5,7 @@ import "./signUpPage.css";
 const SignUpPage = () => {
   return (
     <div className="signUpPage">
-      <SignUp routing="path" path="/sign-up" signInUrl="/sign-in" />
+      <SignUp path="/https://safe-muskox-9.accounts.dev/sign-up" signInUrl="/sign-in"/>
     </div>
   );
 };
