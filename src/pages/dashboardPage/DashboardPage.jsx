@@ -13,6 +13,11 @@ const DashboardPage = () => {
     mutationFn: async (text) => {
       const token = await getToken();
 
+      // Ensure the token is available
+      if (!token) {
+        throw new Error("Authentication failed: No token available");
+      }
+
       return fetch(`${import.meta.env.VITE_API_URL}/api/chats`, {
         method: "POST",
         credentials: "include",
@@ -21,12 +26,20 @@ const DashboardPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ text }),
-      }).then((res) => res.json());
+      }).then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to create chat");
+        }
+        return res.json();
+      });
     },
     onSuccess: (id) => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["userChats"] });
       navigate(`/dashboard/chats/${id}`);
+    },
+    onError: (error) => {
+      console.error("Error creating chat:", error);
     },
   });
 
