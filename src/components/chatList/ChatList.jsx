@@ -1,19 +1,15 @@
-import { useAuth } from "@clerk/clerk-react";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Link } from "react-router-dom";
 import "./chatList.css";
 
 const ChatList = () => {
-  const { getToken } = useAuth();
 
   const fetchUserChats = async () => {
-    const token = await getToken(); // Fetch the token from Clerk
 
     return fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
       credentials: "include",
       headers: {
-        Authorization: `Bearer ${token}`, // Include the Clerk token in the Authorization header
         "Content-Type": "application/json",
       },
     }).then((res) => res.json());
