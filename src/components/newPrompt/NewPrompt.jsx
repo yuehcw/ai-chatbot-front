@@ -1,3 +1,4 @@
+import { useAuth } from "@clerk/clerk-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IKImage } from "imagekitio-react";
 import React, { useEffect, useRef, useState } from "react";
@@ -42,13 +43,17 @@ const NewPrompt = ({ data }) => {
 
   const queryClient = useQueryClient();
 
+  const { getToken } = useAuth();
+
   const mutation = useMutation({
     mutationFn: async () => {
+      const token = await getToken();
 
       return fetch(`${import.meta.env.VITE_API_URL}/api/chats/${data._id}`, {
         method: "PUT",
         credentials: "include",
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
