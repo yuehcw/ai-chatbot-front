@@ -1,4 +1,7 @@
 .signInPage {
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
   height: 100%;
   display: flex;
   align-items: center;
